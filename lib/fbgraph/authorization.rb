@@ -33,15 +33,14 @@ module FBGraph
       JSON.parse(tokens).map { |hash| hash['access_token'] if hash}
     end
 
-  end
-
-  def get_access_token
-    tokens = @client.oauth_client.request(:post, '/oauth/access_token', {
-                                            :client_id     => @client.client_id,
-                                            :client_secret => @client.secret_id,
-                                            :type          => 'client_cred'
-                                          })
-    @client.access_token = tokens[(/access_token=(.*)/),1]
+    def get_access_token
+      tokens = @client.oauth_client.request(:post, '/oauth/access_token', {
+                                              :client_id     => @client.client_id,
+                                              :client_secret => @client.secret_id,
+                                              :type          => 'client_cred'
+                                            })
+      @client.access_token = tokens[(/access_token=(.*)/),1]
+    end
 
   end
 end
